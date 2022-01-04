@@ -8,7 +8,7 @@ contract VendingMachine {
     mapping (address => uint) public donutBalances;
 
     // set the owner as th address that deployed the contract
-	// set the initial vending machine balance to 100
+    // set the initial vending machine balance to 100
     constructor() {
         owner = msg.sender;
         donutBalances[address(this)] = 100;
