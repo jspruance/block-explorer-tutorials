@@ -1,2 +1,3 @@
 # block-explorer-tutorials
-Source code for Block Explorer YouTube channel
+Source code for my Block Explorer YouTube channel
+https://www.youtube.com/c/BlockExplorerMedia
