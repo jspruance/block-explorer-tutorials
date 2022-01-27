@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState, useEffect } from 'react'
 import Web3 from 'web3'
-import vmContract from '../blockchain/vending'
+import vendingMachineContract from '../blockchain/vending'
 import 'bulma/css/bulma.css'
 import styles from '../styles/VendingMachine.module.css'
 
@@ -11,10 +11,12 @@ const VendingMachine = () => {
     const [myDonutCount, setMyDonutCount] = useState('')
     const [buyCount, setBuyCount] = useState('')
     const [address, setAddress] = useState(null)
+    const [vmContract, setVmContract] = useState(null)
 
-    useEffect(async () => {
-      getInventoryHandler()
-    })
+    useEffect(() => {
+      if (vmContract) getInventoryHandler()
+      if (vmContract && address) getMyDonutCountHandler()
+    }, [vmContract, address])
 
     const getInventoryHandler = async () => {
       const inventory = await vmContract.methods.getVendingMachineBalance().call()
@@ -43,14 +45,21 @@ const VendingMachine = () => {
     }
 
     const connectWalletHandler = async () => {
+      /* check if MetaMask is installed */
       if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
           try {
+            /* request wallet connect */
             await window.ethereum.request({ method: "eth_requestAccounts" })
+            /* create web3 instance and set to state var */
             const web3 = new Web3(window.ethereum)
-            accounts = await web3.eth.getAccounts()
+            /* get list of wallet accounts */
+            const accounts = await web3.eth.getAccounts()
+            /* set Account 1 to React state var */
             setAddress(accounts[0])
-            console.log(`connected address ::: ${address}`)
-            getMyDonutCountHandler()
+
+            /* create local contract copy */
+            const vm = vendingMachineContract(web3)
+            setVmContract(vm)
           } catch(err) {
             setError(err.message)
           }
