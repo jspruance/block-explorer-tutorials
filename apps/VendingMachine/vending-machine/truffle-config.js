@@ -1,10 +1,5 @@
 require('dotenv').config()
 const HDWalletProvider = require("@truffle/hdwallet-provider")
-
-const private_keys = [
-  process.env.PRIVATE_KEY_1,
-  process.env.PRIVATE_KEY_2,
-]
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -66,15 +61,15 @@ module.exports = {
     // NB: It's important to wrap the provider as a function.
     rinkeby: {
       provider: () => new HDWalletProvider({
-        privateKeys: private_keys,
-        providerOrUrl: `https://rinkeby.infura.io/v3/${process.env.INFURIA_API_KEY}`,
-        numberOfAddresses: 2
+        privateKeys: [process.env.PRIVATE_KEY_1],
+        providerOrUrl: process.env.INFURA_API_URL,
+        numberOfAddresses: 1
       }),
-      network_id: 4,       // Rinkeby's id
-      gas: 5500000,        // Rinkeby has a lower block limit than mainnet
-      confirmations: 2,    // # of confs to wait between deployments. (default: 0)
-      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+      network_id: 4,
+      gas: 5500000,
+      confirmations: 2,
+      timeoutBlocks: 200,
+      skipDryRun: true
     },
     // ropsten: {
     // provider: () => new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/YOUR-PROJECT-ID`),

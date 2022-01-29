@@ -7,9 +7,11 @@ import styles from '../styles/VendingMachine.module.css'
 
 const VendingMachine = () => {
     const [error, setError] = useState('')
+    const [successMsg, setSuccessMsg] = useState('')
     const [inventory, setInventory] = useState('')
     const [myDonutCount, setMyDonutCount] = useState('')
     const [buyCount, setBuyCount] = useState('')
+    const [web3, setWeb3] = useState(null)
     const [address, setAddress] = useState(null)
     const [vmContract, setVmContract] = useState(null)
 
@@ -33,30 +35,32 @@ const VendingMachine = () => {
     }
 
     const buyDonutHandler = async () => {
-      console.log(`buy address ::: ${address}`)
       try {
-        console.log("try to purchase")
         await vmContract.methods.purchase(buyCount).send({
-          from: address
+          from: address,
+          value: web3.utils.toWei('2', 'ether') * buyCount
         })
+        setSuccessMsg(`${buyCount} donuts purchased!`)
+
+        if (vmContract) getInventoryHandler()
+        if (vmContract && address) getMyDonutCountHandler()
       } catch(err) {
         setError(err.message)
       }
     }
 
     const connectWalletHandler = async () => {
-      /* check if MetaMask is installed */
+      /* check if MetaMask is available */
       if (typeof window !== "undefined" && typeof window.ethereum !== "undefined") {
           try {
             /* request wallet connect */
             await window.ethereum.request({ method: "eth_requestAccounts" })
-            /* create web3 instance and set to state var */
+            /* set web3 instamce */
             const web3 = new Web3(window.ethereum)
-            /* get list of wallet accounts */
+            setWeb3(web3)
+            /* get list of accounts */
             const accounts = await web3.eth.getAccounts()
-            /* set Account 1 to React state var */
             setAddress(accounts[0])
-
             /* create local contract copy */
             const vm = vendingMachineContract(web3)
             setVmContract(vm)
@@ -64,7 +68,7 @@ const VendingMachine = () => {
             setError(err.message)
           }
       } else {
-          // meta mask is not installed
+          // meta mast not installed
           console.log("Please install MetaMask")
       }
     }
@@ -112,6 +116,11 @@ const VendingMachine = () => {
           <section>
               <div className="container has-text-danger">
                   <p>{error}</p>
+              </div>
+          </section>
+          <section>
+              <div className="container has-text-success">
+                  <p>{successMsg}</p>
               </div>
           </section>
         </div>
