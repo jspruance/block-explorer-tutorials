@@ -37,8 +37,7 @@ export default function Home() {
                     <p>{error}</p>
                 </div>
                 </section>
-                <section className="mt-5"></section>
-                <section className="mt-5">
+                <section className="mt-6">
                   <p className={styles.description}>
                     <b>Admin only:</b> Pick winner
                   </p>
