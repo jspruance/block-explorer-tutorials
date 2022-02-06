@@ -7,9 +7,11 @@ import styles from '../styles/VendingMachine.module.css'
 
 const VendingMachine = () => {
     const [error, setError] = useState('')
+    const [successMsg, setSuccessMsg] = useState('')
     const [inventory, setInventory] = useState('')
     const [myDonutCount, setMyDonutCount] = useState('')
     const [buyCount, setBuyCount] = useState('')
+    const [web3, setWeb3] = useState(null)
     const [address, setAddress] = useState(null)
     const [vmContract, setVmContract] = useState(null)
     const [web3, setWeb3] = useState(null)
@@ -34,15 +36,23 @@ const VendingMachine = () => {
     }
 
     const buyDonutHandler = async () => {
-      console.log(`buy address ::: ${address}`)
       try {
+        await vmContract.methods.purchase(buyCount).send({
+          from: address,
+          value: web3.utils.toWei('2', 'ether') * buyCount
+
         console.log("try to purchase")
         await vmContract.methods.purchase(parseInt(buyCount)).send({
           from: address,
           value: web3.utils.toWei('2', 'ether') * buyCount,
           gas: 3000000,
           gasPrice: null
+
         })
+        setSuccessMsg(`${buyCount} donuts purchased!`)
+
+        if (vmContract) getInventoryHandler()
+        if (vmContract && address) getMyDonutCountHandler()
       } catch(err) {
         setError(err.message)
       }
@@ -56,12 +66,13 @@ const VendingMachine = () => {
             await window.ethereum.request({ method: "eth_requestAccounts" })
             /* create web3 instance and set to state var */
             const web3 = new Web3(window.ethereum)
-            /* get list of wallet accounts */
+            /* set web3 instance */
+            setWeb3(web3)
+            /* get list of accounts */
             const accounts = await web3.eth.getAccounts()
             /* set Account 1 to React state var */
             setAddress(accounts[0])
-            /* set web3 instance */
-            setWeb3(web3)
+            
 
             /* create local contract copy */
             const vm = vendingMachineContract(web3)
@@ -118,6 +129,11 @@ const VendingMachine = () => {
           <section>
               <div className="container has-text-danger">
                   <p>{error}</p>
+              </div>
+          </section>
+          <section>
+              <div className="container has-text-success">
+                  <p>{successMsg}</p>
               </div>
           </section>
         </div>
