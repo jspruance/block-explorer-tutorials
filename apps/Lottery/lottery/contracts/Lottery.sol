@@ -68,6 +68,7 @@ contract Lottery is VRFConsumerBase {
         
         // reset the state of the contract
         players = new address payable[](0);
+        randomResult = 0;
     }
 
     modifier onlyowner() {
