@@ -37,18 +37,24 @@ const VendingMachine = () => {
 
     const buyDonutHandler = async () => {
       try {
+<<<<<<< HEAD:apps/VendingMachine/vending-machine-dapp/pages/vending-machine.js
 <<<<<<< HEAD:apps/VendingMachine/vending-machine-app/pages/vending-machine.js
         await vmContract.methods.purchase(buyCount).send({
           from: address,
           value: web3.utils.toWei('2', 'ether') * buyCount
 =======
+=======
+>>>>>>> 486bbb95766046cd17636c19aab8472a9d897742:apps/VendingMachine/vending-machine-app/pages/vending-machine.js
         console.log("try to purchase")
         await vmContract.methods.purchase(parseInt(buyCount)).send({
           from: address,
           value: web3.utils.toWei('2', 'ether') * buyCount,
           gas: 3000000,
           gasPrice: null
+<<<<<<< HEAD:apps/VendingMachine/vending-machine-dapp/pages/vending-machine.js
 >>>>>>> 486bbb95766046cd17636c19aab8472a9d897742:apps/VendingMachine/vending-machine-dapp/pages/vending-machine.js
+=======
+>>>>>>> 486bbb95766046cd17636c19aab8472a9d897742:apps/VendingMachine/vending-machine-app/pages/vending-machine.js
         })
         setSuccessMsg(`${buyCount} donuts purchased!`)
 
@@ -71,8 +77,11 @@ const VendingMachine = () => {
             /* get list of accounts */
             const accounts = await web3.eth.getAccounts()
             setAddress(accounts[0])
+<<<<<<< HEAD:apps/VendingMachine/vending-machine-dapp/pages/vending-machine.js
 <<<<<<< HEAD:apps/VendingMachine/vending-machine-app/pages/vending-machine.js
 =======
+=======
+>>>>>>> 486bbb95766046cd17636c19aab8472a9d897742:apps/VendingMachine/vending-machine-app/pages/vending-machine.js
             /* set web3 instance */
             setWeb3(web3)
 
