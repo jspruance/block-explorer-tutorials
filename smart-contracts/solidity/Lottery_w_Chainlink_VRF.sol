@@ -17,7 +17,7 @@ contract Lottery is VRFConsumerBase {
     constructor()
         VRFConsumerBase(
             0xb3dCcb4Cf7a26f6cf6B120Cf5A73875B7BBc655B, // VRF coordinator
-            0x01BE23585060835E02B77ef475b0Cc51aA1e0709  // LINT token address
+            0x01BE23585060835E02B77ef475b0Cc51aA1e0709  // LINK token address
         ) {
             keyHash = 0x2ed0feb3e7fd2022120aa84fab1945545a9f2ffc9076fd6156fa96eaff4c1311;
             fee = 0.1 * 10 ** 18;    // 0.1 LINK
