@@ -16,7 +16,7 @@ export default function Home() {
   const [error, setError] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
 
-  const treasuryAddress = '0x20f785c09A22215C2DeEBBc9068085C8201A0658'
+  const treasuryAddress = process.env.TREASURY_CONTRACT_ADDRESS
 
   useEffect(() => {
     updateState()
