@@ -4,7 +4,7 @@ const usdcTokenAbi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"na
 const usdcTokenContract = web3 => {
     return new web3.eth.Contract(
       usdcTokenAbi,
-      "0xeb8f08a975Ab53E34D8a0330E0D34de942C95926"
+      "0xdcfab8057d08634279f8201b55d311c2a67897d2"
     )
 }
 

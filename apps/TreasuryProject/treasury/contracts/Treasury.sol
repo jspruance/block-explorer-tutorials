@@ -9,8 +9,8 @@ contract Treasury {
     address payable public owner;
 
     // ERC20 Token addresses on Ropsten network
-    address private immutable wethAddress = 0xc778417E063141139Fce010982780140Aa0cD5Ab;
-    address private immutable usdcAddress = 0xeb8f08a975Ab53E34D8a0330E0D34de942C95926;
+    address private immutable wethAddress = 0xd0a1e359811322d97991e03f863a0c30c2cf029c;
+    address private immutable usdcAddress = 0xdcfab8057d08634279f8201b55d311c2a67897d2;
 
     IERC20 private weth;
     IERC20 private usdc;
@@ -28,9 +28,9 @@ contract Treasury {
 
     AggregatorV3Interface internal priceFeed;
     /**
-     * Network: Rinkeby
+     * Network: Kovan
      * Aggregator: ETH/USD
-     * Address: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
+     * Address: 0x9326BFA02ADD2366b30bacB125260Af641031331
      */
 
     // Treasury Token
@@ -41,7 +41,7 @@ contract Treasury {
         weth = IERC20(wethAddress);
         usdc = IERC20(usdcAddress);
         token = new TreasuryToken(1000000);
-        priceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
+        priceFeed = AggregatorV3Interface(0x9326BFA02ADD2366b30bacB125260Af641031331);
     }
 
     // deposit WETH into the treasury
