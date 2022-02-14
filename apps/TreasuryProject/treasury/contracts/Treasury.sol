@@ -10,7 +10,7 @@ contract Treasury {
 
     // ERC20 Token addresses on Ropsten network
     address private immutable wethAddress = 0xc778417E063141139Fce010982780140Aa0cD5Ab;
-    address private immutable usdcAddress = 0xFE724a829fdF12F7012365dB98730EEe33742ea2;
+    address private immutable usdcAddress = 0xeb8f08a975Ab53E34D8a0330E0D34de942C95926;
 
     IERC20 private weth;
     IERC20 private usdc;

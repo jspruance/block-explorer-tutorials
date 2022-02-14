@@ -21,7 +21,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
   solidity: "0.8.11",
   networks: {
     ropsten: {
-      url: process.env.INFURA_ROPSTEN_ENDPOINT,
+      url: process.env.INFURA_RINKEBY_ENDPOINT,
       accounts: [process.env.PRIVATE_KEY],
     },
   },
