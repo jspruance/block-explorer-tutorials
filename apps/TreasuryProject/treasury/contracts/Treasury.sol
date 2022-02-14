@@ -9,8 +9,8 @@ contract Treasury {
     address payable public owner;
 
     // ERC20 Token addresses on Ropsten network
-    address private immutable wethAddress = 0xd0a1e359811322d97991e03f863a0c30c2cf029c;
-    address private immutable usdcAddress = 0xdcfab8057d08634279f8201b55d311c2a67897d2;
+    address private immutable wethAddress = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
+    address private immutable usdcAddress = 0xdCFaB8057d08634279f8201b55d311c2a67897D2;
 
     IERC20 private weth;
     IERC20 private usdc;
