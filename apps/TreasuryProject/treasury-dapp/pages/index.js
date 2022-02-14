@@ -5,6 +5,7 @@ import wethTokenContract from '../blockchain/wethToken'
 import usdcTokenContract from '../blockchain/usdcToken'
 import styles from '../styles/Home.module.css'
 import 'bulma/css/bulma.css'
+require('dotenv').config()
 
 export default function Home() {
   const [web3, setWeb3] = useState()
