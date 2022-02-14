@@ -41,7 +41,7 @@ contract Treasury {
         weth = IERC20(wethAddress);
         usdc = IERC20(usdcAddress);
         token = new TreasuryToken(1000000);
-        priceFeed = AggregatorV3Interface(0x83F00b902cbf06E316C95F51cbEeD9D2572a349a);
+        priceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419);
     }
 
     // deposit WETH into the treasury
