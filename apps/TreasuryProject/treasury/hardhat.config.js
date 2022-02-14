@@ -20,7 +20,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  module.exports = {
   solidity: "0.8.11",
   networks: {
-    ropsten: {
+    rinkeby: {
       url: process.env.INFURA_RINKEBY_ENDPOINT,
       accounts: [process.env.PRIVATE_KEY],
     },
