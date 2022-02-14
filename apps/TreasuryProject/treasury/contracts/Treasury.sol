@@ -2,6 +2,7 @@
 pragma solidity ^0.8.11;
 
 import "@openzeppelin/contracts/interfaces/IERC20.sol";
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 import "./TreasuryToken.sol";
 
 contract Treasury {
@@ -25,6 +26,13 @@ contract Treasury {
     // keeps track of individuals' treasury USDC balances
     mapping(address => uint) public usdcBalances;
 
+    AggregatorV3Interface internal priceFeed;
+    /**
+     * Network: Ropsten
+     * Aggregator: ETH/USD
+     * Address: 0x83F00b902cbf06E316C95F51cbEeD9D2572a349a
+     */
+
     // Treasury Token
     IERC20 public token;
 
@@ -33,6 +41,7 @@ contract Treasury {
         weth = IERC20(wethAddress);
         usdc = IERC20(usdcAddress);
         token = new TreasuryToken(1000000);
+        priceFeed = AggregatorV3Interface(0x83F00b902cbf06E316C95F51cbEeD9D2572a349a);
     }
 
     // deposit WETH into the treasury
@@ -69,6 +78,20 @@ contract Treasury {
 
     function getTreasuryTokenBalance() external view returns (uint) {
         return token.balanceOf(address(this));
+    }
+
+    /**
+     * Returns the latest price
+     */
+    function getLatestPrice() public view returns (int) {
+        (
+            uint80 roundID, 
+            int price,
+            uint startedAt,
+            uint timeStamp,
+            uint80 answeredInRound
+        ) = priceFeed.latestRoundData();
+        return price;
     }
 
     modifier depositGreaterThanZero(uint _amount) {
