@@ -28,9 +28,9 @@ contract Treasury {
 
     AggregatorV3Interface internal priceFeed;
     /**
-     * Network: Ropsten
+     * Network: Rinkeby
      * Aggregator: ETH/USD
-     * Address: 0x83F00b902cbf06E316C95F51cbEeD9D2572a349a
+     * Address: 0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419
      */
 
     // Treasury Token
