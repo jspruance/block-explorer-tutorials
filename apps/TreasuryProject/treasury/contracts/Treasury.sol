@@ -15,11 +15,6 @@ contract Treasury {
     IERC20 private weth;
     IERC20 private usdc;
 
-    enum TokenList {
-        weth,
-        usdc
-    }
-
     // keeps track of individuals' treasury WETH balances
     mapping(address => uint) public wethBalances;
 
@@ -32,6 +27,8 @@ contract Treasury {
      * Aggregator: ETH/USD
      * Address: 0x9326BFA02ADD2366b30bacB125260Af641031331
      */
+
+    uint public ethPriceInUSD = 0;
 
     // Treasury Token
     IERC20 public token;
@@ -80,10 +77,25 @@ contract Treasury {
         return token.balanceOf(address(this));
     }
 
+    function getInvestorPoolShare() external view returns (uint) {
+        require(ethPriceInUSD > 0)
+        // get ethToDollar price from oracle
+
+        // get pool WETH balance
+        // get pool usdc balance ..convert to ETH
+        // add pool weth & usdc (ETH val)
+
+        // get investor WETH balance
+        // get investor usdc balance ..convert to ETH
+        // add investor weth & usdc (ETH val)
+
+        // pool balance / investor balance = percent of total
+    }
+
     /**
      * Returns the latest price
      */
-    function getLatestPrice() public view returns (int) {
+    function getLatestPrice() public view {
         (
             uint80 roundID, 
             int price,
@@ -91,7 +103,7 @@ contract Treasury {
             uint timeStamp,
             uint80 answeredInRound
         ) = priceFeed.latestRoundData();
-        return price;
+        ethPriceInUSD = price;
     }
 
     modifier depositGreaterThanZero(uint _amount) {
