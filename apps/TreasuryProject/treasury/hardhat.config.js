@@ -20,8 +20,8 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  module.exports = {
   solidity: "0.8.11",
   networks: {
-    rinkeby: {
-      url: process.env.INFURA_RINKEBY_ENDPOINT,
+    kovan: {
+      url: process.env.INFURA_KOVAN_ENDPOINT,
       accounts: [process.env.PRIVATE_KEY],
     },
   },
