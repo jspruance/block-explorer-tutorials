@@ -65,11 +65,11 @@ contract Treasury {
         usdc.transferFrom(msg.sender, address(this), _amount);
     }
 
-    function getTreasuryWethBalance() external view returns (uint) {
+    function getTreasuryWethBalance() internal view returns (uint) {
         return weth.balanceOf(address(this));
     }
 
-    function getTreasuryUsdcBalance() external view returns (uint) {
+    function getTreasuryUsdcBalance() internal view returns (uint) {
         return usdc.balanceOf(address(this));
     }
 
@@ -83,7 +83,7 @@ contract Treasury {
         uint poolWethBal = getTreasuryWethBalance();
         // get pool usdc balance ..convert to ETH
         uint poolUsdcBal = getTreasuryUsdcBalance();
-        uint poolUsdcBalToEth = poolUsdcBal / ethPriceInUSD;
+        uint poolUsdcBalToEth = poolUsdcBal / uint(ethPriceInUSD);
         // add pool weth & usdc (ETH val)
         uint poolBalance = poolWethBal + poolUsdcBalToEth;
 
