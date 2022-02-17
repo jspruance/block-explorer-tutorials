@@ -5,7 +5,6 @@ import wethTokenContract from '../blockchain/wethToken'
 import usdcTokenContract from '../blockchain/usdcToken'
 import styles from '../styles/Home.module.css'
 import 'bulma/css/bulma.css'
-require('dotenv').config()
 
 export default function Home() {
   const [web3, setWeb3] = useState()
@@ -17,7 +16,7 @@ export default function Home() {
   const [error, setError] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
 
-  const treasuryAddress = process.env.TREASURY_CONTRACT_ADDRESS
+  const treasuryAddress = process.env.REACT_APP_TREASURY_CONTRACT_ADDRESS
 
   useEffect(() => {
     updateState()

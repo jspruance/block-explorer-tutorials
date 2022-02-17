@@ -5,7 +5,7 @@ const wethTokenAbi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"na
 const wethTokenContract = web3 => {
     return new web3.eth.Contract(
       wethTokenAbi,
-      process.env.WETH_KOVAN_ADDRESS
+      process.env.REACT_APP_WETH_KOVAN_ADDRESS
     )
 }
 
