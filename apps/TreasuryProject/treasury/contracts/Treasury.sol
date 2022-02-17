@@ -73,7 +73,7 @@ contract Treasury {
         return usdc.balanceOf(address(this));
     }
 
-    function getTreasuryTokenBalance() external view returns (uint) {
+    function getTreasuryTokenBalance() internal view returns (uint) {
         return token.balanceOf(address(this));
     }
 
@@ -99,11 +99,24 @@ contract Treasury {
         return investorPercentOfPool;
     }
 
+    function distributeShareholderTokens(uint percent) external {
+        // TODO: finalize pseudo-code
+        require(percent > 0, "The shareholder must have deposited some funds into the Treasury.");
+        // uint shareholderTokenAmount = percent * getTreasuryTokenBalance();
+        // token.transfer(msg.sender);
+    }
+
     /**
      * Returns the latest price
      */
     function getLatestPrice() public {
-        (,int price,,,) = priceFeed.latestRoundData();
+        (
+            uint80 roundId,
+            int256 price,
+            uint256 startedAt,
+            uint256 updatedAt,
+            uint80 answeredInRound
+        ) = priceFeed.latestRoundData();
         ethPriceInUSD = price;
     }
 
