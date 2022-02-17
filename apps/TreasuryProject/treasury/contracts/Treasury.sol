@@ -10,7 +10,7 @@ contract Treasury {
 
     // ERC20 Token addresses on Ropsten network
     address private immutable wethAddress = 0xd0A1E359811322d97991E03f863a0C30C2cF029C;
-    address private immutable usdcAddress = 0xdCFaB8057d08634279f8201b55d311c2a67897D2;
+    address private immutable usdcAddress = 0xb7a4F3E9097C08dA09517b5aB877F7a917224ede;
 
     IERC20 private weth;
     IERC20 private usdc;
@@ -28,7 +28,7 @@ contract Treasury {
      * Address: 0x9326BFA02ADD2366b30bacB125260Af641031331
      */
 
-    uint public ethPriceInUSD = 0;
+    int public ethPriceInUSD = 0;
 
     // Treasury Token
     IERC20 public token;
@@ -78,31 +78,32 @@ contract Treasury {
     }
 
     function getInvestorPoolShare() external view returns (uint) {
-        require(ethPriceInUSD > 0)
-        // get ethToDollar price from oracle
-
+        require(ethPriceInUSD > 0, "We must have the current Eth price to calculate invetor pool share. PlLease call 'getLatestPrice()'.");
         // get pool WETH balance
+        uint poolWethBal = getTreasuryWethBalance();
         // get pool usdc balance ..convert to ETH
+        uint poolUsdcBal = getTreasuryUsdcBalance();
+        uint poolUsdcBalToEth = poolUsdcBal / ethPriceInUSD;
         // add pool weth & usdc (ETH val)
+        uint poolBalance = poolWethBal + poolUsdcBalToEth;
 
         // get investor WETH balance
+        uint investorWethBal = wethBalances[msg.sender];
         // get investor usdc balance ..convert to ETH
+        uint investorUsdcBal = usdcBalances[msg.sender];
         // add investor weth & usdc (ETH val)
+        uint investorBalance = investorWethBal + investorUsdcBal;
 
         // pool balance / investor balance = percent of total
+        uint investorPercentOfPool = investorBalance / poolBalance;
+        return investorPercentOfPool;
     }
 
     /**
      * Returns the latest price
      */
-    function getLatestPrice() public view {
-        (
-            uint80 roundID, 
-            int price,
-            uint startedAt,
-            uint timeStamp,
-            uint80 answeredInRound
-        ) = priceFeed.latestRoundData();
+    function getLatestPrice() public {
+        (,int price,,,) = priceFeed.latestRoundData();
         ethPriceInUSD = price;
     }
 
