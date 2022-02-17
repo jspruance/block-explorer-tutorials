@@ -16,7 +16,7 @@ export default function Home() {
   const [error, setError] = useState('')
   const [successMsg, setSuccessMsg] = useState('')
 
-  const treasuryAddress = process.env.REACT_APP_TREASURY_CONTRACT_ADDRESS
+  const treasuryAddress = process.env.NEXT_PUBLIC_TREASURY_CONTRACT_ADDRESS
 
   useEffect(() => {
     updateState()
@@ -41,6 +41,7 @@ export default function Home() {
     let resp;
     try {
       if (token === 'weth') {
+        console.log(`treasuryAddress ::: ${treasuryAddress}`)
         resp = await wethContract.methods.approve(treasuryAddress, wethDepositAmount).send({
           from: address,
           gas: 300000,

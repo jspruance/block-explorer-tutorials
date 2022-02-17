@@ -3,7 +3,7 @@ const usdcTokenAbi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"na
 const usdcTokenContract = web3 => {
     return new web3.eth.Contract(
       usdcTokenAbi,
-      process.env.REACT_APP_USDC_KOVAN_ADDRESS
+      process.env.NEXT_PUBLIC_USDC_KOVAN_ADDRESS
     )
 }
 
