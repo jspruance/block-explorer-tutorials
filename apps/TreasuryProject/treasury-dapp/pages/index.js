@@ -31,7 +31,6 @@ export default function Home() {
   }
 
   const usdcDepositAmountHandler = event => {
-    console.log(event.target.value)
     setUsdcDepositAmount(event.target.value)
   }
 
@@ -41,7 +40,6 @@ export default function Home() {
     let resp;
     try {
       if (token === 'weth') {
-        console.log(`treasuryAddress ::: ${treasuryAddress}`)
         resp = await wethContract.methods.approve(treasuryAddress, wethDepositAmount).send({
           from: address,
           gas: 300000,
