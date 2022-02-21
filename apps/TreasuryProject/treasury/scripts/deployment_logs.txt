@@ -19,3 +19,6 @@ One Percent Token contract address (Kovan):
 0xbFDf60fF5a95512fA25e06ff798D37F63777680a
 
 One Percent Token Tx hashes:
+
+Transfer of 1000 tokens from acct1 to acct2:
+https://kovan.etherscan.io/tx/0x47bb0fa85f17c24312781f28d146ddf6c20d39f46f66e34a3f96a674180fc5ed
