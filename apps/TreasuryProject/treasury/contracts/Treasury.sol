@@ -104,13 +104,12 @@ contract Treasury {
     }
 
     function distributeShareholderTokens() external returns (bool) {
-        // TODO: finalize pseudo-code
         uint investorPercent = getInvestorPoolShare();
         require(investorPercent > 0, "The shareholder must have deposited some funds into the Treasury.");
         uint treasuryTokenBalance = getTreasuryTokenBalance();
         uint investorTokenShare = (treasuryTokenBalance * investorPercent) / 100;
         bool transferSucceeded = token.transfer(msg.sender, investorTokenShare);
-        return true;
+        return transferSucceeded;
     }
 
     /**
