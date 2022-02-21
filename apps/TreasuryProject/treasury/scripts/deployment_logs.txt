@@ -1,0 +1,21 @@
+npx hardhat run --network kovan scripts/deploy-treasury.js
+npx hardhat run --network kovan scripts/deploy-one-percent-token.js
+
+Treasury contract address (Kovan):
+0xc9A2B5e382E417844794E36c1C0DCA16E88A094d
+
+Treasury contract Tx hashes:
+
+Deposit 1, acct 1: (100000000000000000 WETH)
+https://kovan.etherscan.io/tx/0xd452bc23afaa984720df13b6d3838fb6a1d30420e6dcb88d02e35f5c9d6406d1
+
+Deposit 2, acct 2: (100000000000000000 WETH)
+https://kovan.etherscan.io/tx/0x9c739eb621d61b367d1f4d390a2c30ad919cdab2e452194259c22a8cad08285a
+
+Transfer shares, acct 1 (500000000000000000000000 TRTO):
+https://kovan.etherscan.io/tx/0xa89bb210329e7d080b3a598df44e2bc7b583fe268915cb9e21e35ebfb547d78c
+
+One Percent Token contract address (Kovan):
+0xbFDf60fF5a95512fA25e06ff798D37F63777680a
+
+One Percent Token Tx hashes:
