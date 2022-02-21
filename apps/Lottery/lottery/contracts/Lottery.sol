@@ -58,7 +58,7 @@ contract Lottery is VRFConsumerBase {
         getRandomNumber();
     }
 
-    function payWinner() public {
+    function payWinner() public onlyOwner {
         require(randomResult > 0, "Must have a source of randomness before choosing winner");
         uint index = randomResult % players.length;
         players[index].transfer(address(this).balance);
