@@ -81,7 +81,7 @@ contract Treasury {
         return token.balanceOf(address(this));
     }
 
-    function getInvestorPoolShare() public returns (uint) {
+    function getInvestorPoolShare() public view returns (uint) {
         require(ethPriceInUSD > 0, "We must have the current Eth price to calculate invetor pool share. PlLease call 'getLatestPrice()'.");
         // get pool WETH balance
         uint poolWethBal = getTreasuryWethBalance();

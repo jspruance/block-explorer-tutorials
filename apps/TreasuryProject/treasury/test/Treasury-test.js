@@ -46,13 +46,13 @@ describe("Treasury contract", function () {
       })
   })
 
-  describe("Deposit WETH", function () {
-    it("Should accept WETH deposits and update the user's balance", async function () {
-        // Expect user's balance to be incremented to reflect deposit
-        // TODO: figure out how to call 'approve' on Kova weth contract for this test
-        await treasury.connect(addr1).depositWeth(1, { value: 30000 });
-        expect(wethBalances[addr1] == 1);
-    });
-  });
+  // describe("Deposit WETH", function () {
+  //   it("Should accept WETH deposits and update the user's balance", async function () {
+  //       // Expect user's balance to be incremented to reflect deposit
+  //       // TODO: figure out how to call 'approve' on Kova weth contract for this test
+  //       await treasury.connect(addr1).depositWeth(1, { value: 30000 });
+  //       expect(wethBalances[addr1] == 1);
+  //   });
+  // });
 
 });
