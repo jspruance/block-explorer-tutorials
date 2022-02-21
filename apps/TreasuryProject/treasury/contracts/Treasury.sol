@@ -65,19 +65,23 @@ contract Treasury {
         usdc.transferFrom(msg.sender, address(this), _amount);
     }
 
-    function getTreasuryWethBalance() internal view returns (uint) {
+    function getTreasuryWethBalance() public view returns (uint) {
         return weth.balanceOf(address(this));
     }
 
-    function getTreasuryUsdcBalance() internal view returns (uint) {
+    function getTreasuryUsdcBalance() public view returns (uint) {
         return usdc.balanceOf(address(this));
     }
 
-    function getTreasuryTokenBalance() internal view returns (uint) {
+    function getInvestorTokenBalance() public view returns (uint) {
+        return token.balanceOf(msg.sender);
+    }
+
+    function getTreasuryTokenBalance() public view returns (uint) {
         return token.balanceOf(address(this));
     }
 
-    function getInvestorPoolShare() external view returns (uint) {
+    function getInvestorPoolShare() public returns (uint) {
         require(ethPriceInUSD > 0, "We must have the current Eth price to calculate invetor pool share. PlLease call 'getLatestPrice()'.");
         // get pool WETH balance
         uint poolWethBal = getTreasuryWethBalance();
@@ -90,20 +94,23 @@ contract Treasury {
         // get investor WETH balance
         uint investorWethBal = wethBalances[msg.sender];
         // get investor usdc balance ..convert to ETH
-        uint investorUsdcBal = usdcBalances[msg.sender];
+        uint investorUsdcBal = usdcBalances[msg.sender] / uint(ethPriceInUSD);
         // add investor weth & usdc (ETH val)
         uint investorBalance = investorWethBal + investorUsdcBal;
 
         // pool balance / investor balance = percent of total
-        uint investorPercentOfPool = investorBalance / poolBalance;
+        uint investorPercentOfPool = (investorBalance * 100) / poolBalance;
         return investorPercentOfPool;
     }
 
-    function distributeShareholderTokens(uint percent) external {
+    function distributeShareholderTokens() external returns (bool) {
         // TODO: finalize pseudo-code
-        require(percent > 0, "The shareholder must have deposited some funds into the Treasury.");
-        // uint shareholderTokenAmount = percent * getTreasuryTokenBalance();
-        // token.transfer(msg.sender);
+        uint investorPercent = getInvestorPoolShare();
+        require(investorPercent > 0, "The shareholder must have deposited some funds into the Treasury.");
+        uint treasuryTokenBalance = getTreasuryTokenBalance();
+        uint investorTokenShare = (treasuryTokenBalance * investorPercent) / 100;
+        bool transferSucceeded = token.transfer(msg.sender, investorTokenShare);
+        return true;
     }
 
     /**
