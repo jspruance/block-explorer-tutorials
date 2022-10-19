@@ -82,7 +82,7 @@ contract Treasury {
     }
 
     function getInvestorPoolShare() public view returns (uint) {
-        require(ethPriceInUSD > 0, "We must have the current Eth price to calculate invetor pool share. PlLease call 'getLatestPrice()'.");
+        require(ethPriceInUSD > 0, "We must have the current Eth price to calculate invetor pool share. Please call 'getLatestPrice()'.");
         // get pool WETH balance
         uint poolWethBal = getTreasuryWethBalance();
         // get pool usdc balance ..convert to ETH
